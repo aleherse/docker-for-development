@@ -1,0 +1,36 @@
+{% extends 'main.html.twig' %}
+
+{% block container %}
+    <div class="row">
+        <div class="col-md-12">
+            <h1>Docker for development</h1>
+            <table class="table">
+                <thead>
+                    <tr><th>To</th><th>Subject</th><th>Body</th><th>Date</th></tr>
+                </thead>
+                <tbody>
+                {% for email in emails %}
+                    <tr><td>{{ email.to }}</td><td>{{ email.subject }}</td><td>{{ email.body }}</td><td>{{ email.date }}</td></tr>
+                {% else %}
+                    <tr><td colspan="4">No email has been sent</td></tr>
+                {% endfor %}
+                </tbody>
+            </table>
+            <form action="/send" method="post">
+                <div class="form-group">
+                    <label for="to">Email address</label>
+                    <input type="email" class="form-control" id="to" name="to" placeholder="Email" value="docker@example.com">
+                </div>
+                <div class="form-group">
+                    <label for="subject">Subject</label>
+                    <input type="text" class="form-control" id="subject" name="subject" placeholder="Subject" value="local development test">
+                </div>
+                <div class="form-group">
+                    <label for="body">Message</label>
+                    <textarea class="form-control" rows="3" id="body" name="body"></textarea>
+                </div>
+                <button type="submit" class="btn btn-default">Submit</button>
+            </form>
+        </div>
+    </div>
+{% endblock %}
